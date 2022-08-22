@@ -9,13 +9,24 @@ const money = [2000, 500, 200, 100, 50, 10, 5, 1];
 
 
 function clickHandler() {
+
+    if (!billAmount.value || !cashGiven.value) {
+        alert("Enter all neccessary values")
+        return
+    } else if (billAmount.value <= 0 || cashGiven.value <= 0) {
+        alert("Enter proper values")
+        return
+    }
     message.style.display = "none";
 
     if (billAmount.value > 0) {
-        if (cashGiven.value >= billAmount.value) {
+        if (cashGiven.value > billAmount.value) {
             let amountToBeReturned = cashGiven.value - billAmount.value;
             calculate(amountToBeReturned);
-        } else {
+        } else if (cashGiven.value == billAmount.value) {
+            showMessage("No Return change required ");
+        }
+        else {
             showMessage("Ready to wash the plates ...? ");
         }
     } else {
